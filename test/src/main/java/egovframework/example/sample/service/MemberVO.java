@@ -1,6 +1,9 @@
 package egovframework.example.sample.service;
 
 public class MemberVO {
+	
+	
+	
 	private String userId;
 	private String userPw;
 	private String userName;
