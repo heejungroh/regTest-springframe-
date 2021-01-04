@@ -3,9 +3,22 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
 
 	<!-- SqlMap setup for iBATIS Database Layer -->
-	<bean id="sqlMapClient" class="egovframework.rte.psl.orm.ibatis.SqlMapClientFactoryBean">
+	<!-- <bean id="sqlMapClient" class="egovframework.rte.psl.orm.ibatis.SqlMapClientFactoryBean">
 		<property name="configLocation" value="classpath:/egovframework/sqlmap/example/sql-map-config.xml"/>
 		<property name="dataSource" ref="dataSource"/>
+	</bean> -->
+	
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="configLocation" value="classpath:/egovframework/sqlmap/example/sql-map-config.xml" />
+        <property name="mapperLocations" value="classpath:*Mapper.xml"/>
+    </bean>
+    
+    <bean id="sqlSession" 
+	      class="org.mybatis.spring.SqlSessionTemplate" 
+	      destroy-method="clearCache">
+		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>
 	</bean>
+
 
 </beans>
